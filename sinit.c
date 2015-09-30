@@ -33,8 +33,10 @@ main(void)
 	int sig;
 	size_t i;
 
-	if (getpid() != 1)
+	if (getpid() != 1) {
+		fprintf(stderr, "sinit: needs to be PID 1\n");
 		return 1;
+        }
 	if (chdir("/") != 0) {
 		perror("chdir");
 		return 2;
