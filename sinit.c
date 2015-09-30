@@ -35,7 +35,10 @@ main(void)
 
 	if (getpid() != 1)
 		return 1;
-	chdir("/");
+	if (chdir("/") != 0) {
+		perror("chdir");
+		return 2;
+	}
 	sigfillset(&set);
 	sigprocmask(SIG_BLOCK, &set, NULL);
 	spawn(rcinitcmd);
